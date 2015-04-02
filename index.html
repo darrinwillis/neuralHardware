@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Neuralhardware by darrinwillis</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Neuralhardware</h1>
+          <h2>FPGA Based Neural Networks</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/darrinwillis/neuralHardware/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/darrinwillis/neuralHardware/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/darrinwillis/neuralHardware" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a id="neural-hardware-fpga-based-neural-networks" class="anchor" href="#neural-hardware-fpga-based-neural-networks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Neural Hardware: FPGA-based Neural Networks</h1>
+
+<h2>
+<a id="darrin-willis-dswillis-and-bohan-li-bohanl" class="anchor" href="#darrin-willis-dswillis-and-bohan-li-bohanl" aria-hidden="true"><span class="octicon octicon-link"></span></a>Darrin Willis (dswillis) and Bohan Li (bohanl)</h2>
+
+<h2>
+<a id="summary" class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h2>
+
+<p>We will be investigating an implementation of Neural Networks into a low-energy FPGA implementation. Neural Networks are a common machine learning algorithm with a high potential for parallelization, which can be exploited by hardware.</p>
+
+<h2>
+<a id="background" class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h2>
+
+<h2>
+<a id="challenge" class="anchor" href="#challenge" aria-hidden="true"><span class="octicon octicon-link"></span></a>Challenge</h2>
+
+<p>Designing hardware to solve any problem is frequently a more challenging way to develop a computer solution to a problem. The main challenge in this space will be porting a Neural Network solver to the System Verilog hardware description language. The solver will likely utilize some interesting hardware algorithms for pipelining the processes to make maximum use of the hardware. </p>
+
+<h2>
+<a id="resources" class="anchor" href="#resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resources</h2>
+
+<p>We will be utilizing standard tools for live communicating with a host machine, which will include FPGA specific hardware modules and potentially some PC-side libraries for the communication. Along the way, we will likely also make use of some </p>
+
+<h2>
+<a id="goals-and-deliverables" class="anchor" href="#goals-and-deliverables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goals and Deliverables</h2>
+
+<h3>
+<a id="plan-to-achieve" class="anchor" href="#plan-to-achieve" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plan to Achieve</h3>
+
+<p>A:</p>
+
+<ul>
+<li>PC-side visualization and analysis of performance live with the FPGA running</li>
+<li>PC-standalone implementation of Neural Network application to compare benchmarks</li>
+<li>(includes all below)</li>
+</ul>
+
+<p>B:</p>
+
+<ul>
+<li>In depth analysis of hardware size, speed, power, and complexity</li>
+<li>Alternatively, analysis of why Neural Networks are not a good fit for FPGA implementation</li>
+</ul>
+
+<p>C:</p>
+
+<ul>
+<li>Full stack implementation of Neural Network application on FPGA and PC heterogeneous computing environment</li>
+</ul>
+
+<h3>
+<a id="hope-to-achieve" class="anchor" href="#hope-to-achieve" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hope to Achieve</h3>
+
+<ul>
+<li>Interesting application of neural networks (AI, image processing, etc.)</li>
+<li>Different hardware implementations to compare hardware stacks</li>
+</ul>
+
+<h2>
+<a id="platform-choice" class="anchor" href="#platform-choice" aria-hidden="true"><span class="octicon octicon-link"></span></a>Platform Choice</h2>
+
+<p>FPGAs are the best hardware prototyping tool and are more popular than ever, with the new focus on solving problems on energy sensitive devices. Machine learning has become a mature field, and its algorithms are becoming only more commonplace. It is foreseeable that mobile devices could have an integrated ML chip in them in order to open up a whole new area of applications. This project aims to explore a specific case of these algorithms in the form of Neural Networks.</p>
+
+<h2>
+<a id="schedule" class="anchor" href="#schedule" aria-hidden="true"><span class="octicon octicon-link"></span></a>Schedule</h2>
+
+<h3>
+<a id="week-of-41-to-47" class="anchor" href="#week-of-41-to-47" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week of 4/1 to 4/7</h3>
+
+<ul>
+<li>Investigate different available FPGAs and select one</li>
+<li>Investigate PC host environment for FPGAs and what is the best way to interface with FPGA</li>
+<li>Research Neural Networks to gain an initial idea of the hardware algorithm</li>
+</ul>
+
+<h3>
+<a id="week-of-48-to-414-project-checkpoint" class="anchor" href="#week-of-48-to-414-project-checkpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week of 4/8 to 4/14 (Project Checkpoint)</h3>
+
+<ul>
+<li>Figure out modules for communicating with FPGA and take care of as much boilerplate as possible</li>
+<li>Pick a specific Neural Network application to implement on the FPGA</li>
+</ul>
+
+<h3>
+<a id="week-of-415-to-421" class="anchor" href="#week-of-415-to-421" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week of 4/15 to 4/21</h3>
+
+<ul>
+<li>Begin implementing FPGA Neural Network algorithm</li>
+<li>Begin PC-side Neural Network algorithm</li>
+<li>Fix any remaining communication infrastructure</li>
+</ul>
+
+<h3>
+<a id="week-of-422-to-428" class="anchor" href="#week-of-422-to-428" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week of 4/22 to 4/28</h3>
+
+<ul>
+<li>Continue developing FPGA algorithm</li>
+<li>Continue developing PC algorithm</li>
+<li>Begin analysis and testing harness for both implementations</li>
+</ul>
+
+<h3>
+<a id="week-of-429-to-55" class="anchor" href="#week-of-429-to-55" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week of 4/29 to 5/5</h3>
+
+<ul>
+<li>Finish FPGA algorithm</li>
+<li>Finish PC algorithm</li>
+<li>Create analysis and contrast different hardware implementations</li>
+</ul>
+
+<h3>
+<a id="week-of-56-to-511-parallelism-competition" class="anchor" href="#week-of-56-to-511-parallelism-competition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week of 5/6 to 5/11 Parallelism Competition</h3>
+
+<ul>
+<li>Finish up any remaining analysis</li>
+<li>Fix up anything which wasn't yet done</li>
+</ul>
+        </section>
+
+        <footer>
+          Neuralhardware is maintained by <a href="https://github.com/darrinwillis">darrinwillis</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
