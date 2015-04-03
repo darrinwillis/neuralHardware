@@ -52,31 +52,33 @@
 <p>The key to this training process lies in the set of weights given to the input values. We will be configuring these weights based on training data with known outputs for certain inputs. The weight calculations will be done using the backpropagation algorithm. This algorithm essentially iterates through the training dataset and alters the weights until we reach a certain error threshold. </p>
 
 <p>Sequential implementation of Backpropagation algorithm:</p>
-<blockquote>while(previous error > error) {
-            for(each test datapoint) {
-                for(each hidden node) {
-                    sum = 0;
-                    for(each input node)
-                        sum += weight * input;
-                    hidden_value = 1/(1+Math.exp(-sum));
-                }
-                sum = 0;
-                for(each hidden node)
-                    sum += weight * hidden_value
-                output_value = 1/(1+Math.exp(-sum));
+<blockquote>while(previous error > error) {<br/>
+&nbsp;&nbsp;for(each test datapoint) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;for(each hidden node) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum = 0;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(each input node)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum += weight * input;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hidden_value = 1/(1+Math.exp(-sum));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;sum = 0;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;for(each hidden node)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum += weight * hidden_value<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;output_value = 1/(1+Math.exp(-sum));<br/><br/>
 
-                error += (output_value - true_value)^2;
-                outuput_weight_err = error caused by output weight;
+&nbsp;&nbsp;&nbsp;&nbsp;error += (output_value - true_value)^2;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;outuput_weight_err = error caused by output weight;<br/><br/>
 
-                for(each hidden node) {
-                    hidden_weight_err = error caused by hidden weight;
-                    for(each input node)
-                        new_hidden_weight = old weight + weight change;
-                    new_output_weight = old weight + weight change;
-                }
-            }
-        }
+&nbsp;&nbsp;&nbsp;&nbsp;for(each hidden node) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hidden_weight_err = error caused by hidden weight;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(each input node)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_hidden_weight = old weight + weight change;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_output_weight = old weight + weight change;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;}
+}
 </blockquote>
+
+<p>As seen from the pseudocode above, there are a few clear avenues for parallelism in the algorithm. Specifically, the weighted sum and error update portions can be easily parallelized. Although, parallelization with respect to test data points does not immediately follow from this code, we plan to modify the algorithm to accommodate. </p>
 
 
 <h2>
