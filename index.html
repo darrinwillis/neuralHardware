@@ -66,15 +66,15 @@
 &nbsp;&nbsp;&nbsp;&nbsp;output_value = 1/(1+Math.exp(-sum));<br/><br/>
 
 &nbsp;&nbsp;&nbsp;&nbsp;error += (output_value - true_value)^2;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;outuput_weight_err = error caused by output weight;<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;output_weight_err = error caused by output weight;<br/><br/>
 
 &nbsp;&nbsp;&nbsp;&nbsp;for(each hidden node) {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hidden_weight_err = error caused by hidden weight;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(each input node)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_hidden_weight = old weight + weight change;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_output_weight = old weight + weight change;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br/>
+&nbsp;&nbsp;&#125;<br/>
 }
 </blockquote>
 
