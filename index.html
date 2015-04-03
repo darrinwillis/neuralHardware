@@ -45,6 +45,40 @@
 <h2>
 <a id="background" class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h2>
 
+<p>An artificial neural network is a statistical learning algorithm involving layers of nodes, called perceptrons, which process information in a way that approximates an unknown function. Starting from an input layer, information is filtered, modified, and passed down through a series of hidden layers until reaching the final output layer. One of the major uses of neural networks involves their ability to discern the underlying function connected a set of input values to a set of output values.</p>
+
+<p>Our goal will be to train a neural network with one hidden layer. Each input node will send it’s weighted input to all nodes in our hidden layer. The hidden layer nodes will then apply a sigmoid function 1/(1+e^(-x)), where x is the sum of their corresponding inputs. Finally, these values are sent to the single output node in the same fashion and modified to return a meaningful output. </p>
+
+<p>The key to this training process lies in the set of weights given to the input values. We will be configuring these weights based on training data with known outputs for certain inputs. The weight calculations will be done using the backpropagation algorithm. This algorithm essentially iterates through the training dataset and alters the weights until we reach a certain error threshold. </p>
+
+<p>Sequential implementation of Backpropagation algorithm:</p>
+<blockquote>while(previous error > error) {
+            for(each test datapoint) {
+                for(each hidden node) {
+                    sum = 0;
+                    for(each input node)
+                        sum += weight * input;
+                    hidden_value = 1/(1+Math.exp(-sum));
+                }
+                sum = 0;
+                for(each hidden node)
+                    sum += weight * hidden_value
+                output_value = 1/(1+Math.exp(-sum));
+
+                error += (output_value - true_value)^2;
+                outuput_weight_err = error caused by output weight;
+
+                for(each hidden node) {
+                    hidden_weight_err = error caused by hidden weight;
+                    for(each input node)
+                        new_hidden_weight = old weight + weight change;
+                    new_output_weight = old weight + weight change;
+                }
+            }
+        }
+</blockquote>
+
+
 <h2>
 <a id="challenge" class="anchor" href="#challenge" aria-hidden="true"><span class="octicon octicon-link"></span></a>Challenge</h2>
 
