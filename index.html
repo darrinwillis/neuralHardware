@@ -145,13 +145,46 @@
 <p>In terms of the software side, the only goal left is the final tuning and analysis. This should be completed by Bohan Li within the week. Afterwards, both partners will be working on porting the code to hardware.</p>
 
 <h2>
+<a id="checkpoint-software-side" class="anchor" href="#checkpoint-software-side" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checkpoint - Hardware Side</h2>
+
+<p>
+The hardware platform has been progressing along mostly well.
+The goals of each schedule item have been updated below to reflect 
+the current progress. The chosen FPGA was the 
+  <a href="http://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=502">Altera DE2-115</a>,
+which
+uses the popular Quartus toolchain, which is standard throughout CMU 
+hardware courses. The DE2-115 board has an ethernet port, and has demo 
+projects showcasing how to utilizes the board as a web server, which 
+will hopefully make the process of host to board communication more 
+seamless.
+</p>
+
+<p>
+Ethernet will be used as the standard communication protocol for
+communicating with the FPGA, but the exact nature of the protocol
+has yet to be determined. It will likely be a several phase process
+with a minimum of a training phase and a testing phase, during which
+the board will send different kinds of messages to the host machine.
+</p>
+
+<p>
+The actual hardware design has not yet begun, but is about to begin,
+as is in accord with the schedule. The algorithm seems like it will
+likely be a relatively simple datapath, with a large amount of matrix
+multiplication, but no other significant components. A third party
+IP blob will likely be utilized for the ethernet communication, and
+currently a library is in the process of being determined.
+</p>
+
+<h2>
 <a id="schedule" class="anchor" href="#schedule" aria-hidden="true"><span class="octicon octicon-link"></span></a>Schedule</h2>
 
 <h3>
 <a id="week-of-41-to-47" class="anchor" href="#week-of-41-to-47" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week of 4/1 to 4/7</h3>
 
 <ul>
-<li>Investigate different available FPGAs and select one</li>
+  <li>Investigate different available FPGAs and select one</li>
 <li>Investigate PC host environment for FPGAs and what is the best way to interface with FPGA</li>
 <li>Research Neural Networks to gain an initial idea of the hardware algorithm</li>
 </ul>
