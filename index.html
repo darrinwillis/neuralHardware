@@ -132,6 +132,19 @@
 <p>FPGAs are the best hardware prototyping tool and are more popular than ever, with the new focus on solving problems on energy sensitive devices. Machine learning has become a mature field, and its algorithms are becoming only more commonplace. It is foreseeable that mobile devices could have an integrated ML chip in them in order to open up a whole new area of applications. This project aims to explore a specific case of these algorithms in the form of Neural Networks.</p>
 
 <h2>
+<a id="checkpoint-software-side" class="anchor" href="#checkpoint-software-side" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checkpoint - Software Side</h2>
+
+<p>The software side of this project revolves around tuning the neural network implementation on the computer. We have written and tested a working parallel implementation of a neural network with one hidden layer. The implementation parallelizes over nodes in each layer. The concurrency comes from the weighted sums calculated using matrix multiplication. We used the openmp abstraction in order to implement this.</p>
+
+<p>We have decided to use a song popularity classification dataset to test our implementation. The reason is because the final FPGA implementation could be embedded into a cell phone and used as a tool to determine whether or not a song will be popular. Specifically, the input is an array of song properties such as length, bpm, etc. and the output is a number representing how popular the song will be. The neural network will be trained using historical data from the past few years.</p>
+
+<p>We have finished coding the bulk of the PC-side part of the project and plan to tune the parameters passed into the neural network before publishing analysis. In addition, we have only tested the implementation using mock datasets, so we are still unsure of whether or not it will end up being a useful application.</p>
+
+<p>The most glaring issue is that our simple neural network may not be able to produce accurate results. During the process of tweaking parameters, we may realize that we have chosen an inappropriate dataset. If this ends up being the case, we will switch to a simpler one: taking in exam grades and calculating the final average. The design of our neural network should make this task easy, however there are less feasible applications that could be around this.</p>
+
+<p>In terms of the software side, the only goal left is the final tuning and analysis. This should be completed by Bohan Li within the week. Afterwards, both partners will be working on porting the code to hardware.</p>
+
+<h2>
 <a id="schedule" class="anchor" href="#schedule" aria-hidden="true"><span class="octicon octicon-link"></span></a>Schedule</h2>
 
 <h3>
