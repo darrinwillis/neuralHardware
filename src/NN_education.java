@@ -1,10 +1,10 @@
 import java.util.*;
 import java.io.*;
 
-public class NN_music {
+public class NN_education {
     public final int nh = 4;
-    public final double r = .2;
-    public final int n = 4;
+    public final double r = .1;
+    public final int n = 5;
     public final int iterations = 200;
 
     public double[][] hw = new double[n][nh];
@@ -20,28 +20,16 @@ public class NN_music {
         while(line != null) {
             String[] words = line.split(",");
             double[] vals = new double[words.length];
-            vals[0] = (2000 - Double.parseDouble(words[0]))/50 - 1;
-            vals[1] = (7 - Double.parseDouble(words[1]))/3.5 - 1;
-            if(words[2].equals("yes"))
-                vals[2] = 1;
-            else
-                vals[2] = -1;
-            if(words[3].equals("yes"))
-                vals[3] = 1;
-            else
-                vals[3] = -1;
-            if(words[4].equals("yes"))
-                vals[4] = 1;
-            else
-                vals[4] = 0;
+            for(int i = 0; i < words.length; i ++) 
+                vals[i] = Double.parseDouble(words[i]);
             lines.add(vals);
             size++;
             line = test.readLine();
         }
         
-        NN_music nn = new NN_music();
+        NN_education nn = new NN_education();
         nn.BP(lines);
-        System.out.println("TRAINING COMPLETED! NOW PREDICTING");
+        System.out.println("TRAINING COMPLETED! NOW PREDICTING.");
         BufferedReader dev = new BufferedReader(new FileReader(args[1]));
         lines.clear();
         line = dev.readLine();
@@ -49,17 +37,8 @@ public class NN_music {
         while(line != null) {
             String[] words = line.split(",");
             double[] vals = new double[words.length];
-            vals[0] = (2000 - Double.parseDouble(words[0]))/50 - 1;
-            vals[1] = (7 - Double.parseDouble(words[1]))/3.5 - 1;
-            if(words[2].equals("yes"))
-                vals[2] = 1;
-            else
-                vals[2] = -1;
-            if(words[3].equals("yes"))
-                vals[3] = 1;
-            else
-                vals[3] = -1;
-          
+            for(int i = 0; i < words.length; i ++) 
+                vals[i] = Double.parseDouble(words[i]);
             lines.add(vals);
             size++;
             line = dev.readLine();
@@ -74,7 +53,7 @@ public class NN_music {
             for(int h = 0; h < nh; h++) {
                 sum = 0;
                 for(int i = 0; i < n; i++) 
-                    sum += hw[i][h] * ex[i];
+                    sum += hw[i][h] * ex[i]/100;
                 hid[h] = 1/(1+Math.exp(-sum));
             }
             
@@ -82,10 +61,7 @@ public class NN_music {
             for(int h = 0; h < nh; h++) 
                 sum += ow[h] * hid[h];
             
-            if (.5 < 1/(1+Math.exp(-sum))) 
-                System.out.println("yes");
-            else 
-                System.out.println("no");
+            System.out.println((double)Math.round(1/(1+Math.exp(-sum)) * 100));
         }
     }
     
@@ -94,7 +70,9 @@ public class NN_music {
         double[] hErr = new double[nh];
         double out;
         double oErr = 0;
-        double error = 0;
+        double error = 100000;
+        double prevError = 100001;
+        int count = 0;
 
         //intialize hw and ow
         Random rand = new Random();
@@ -107,14 +85,15 @@ public class NN_music {
             ow[i] = rand.nextDouble()/10;
 
         hid[0] = 1;
-        
-        for(int count = 0; count < iterations; count++) {
+      
+        while(prevError > error) {
+            prevError = error;
             error = 0;
             for(double[] ex : test) {
                 for(int h = 0; h < nh; h++) {
                     sum = 0;
                     for(int i = 0; i < n; i++) 
-                        sum += hw[i][h] * ex[i];
+                        sum += hw[i][h] * ex[i]/100;
                     hid[h] = 1/(1+Math.exp(-sum));
                 }
                 
@@ -123,10 +102,9 @@ public class NN_music {
                     sum += ow[h] * hid[h];
 
                 out = 1/(1+Math.exp(-sum));
+                error += (out - ex[n]/100) * (out - ex[n]/100);
 
-                error += (out - ex[n]) * (out - ex[n]);
-
-                oErr = out * (1 - out) * (ex[n] - out);
+                oErr = out * (1 - out) * (ex[n]/100 - out);
                 
                 for(int h = 0; h < nh; h++) {
                     hErr[h] = hid[h] * (1 - hid[h]) * ow[h] * oErr;
@@ -137,6 +115,12 @@ public class NN_music {
             }
             if (count % 10 == 0) 
                 System.out.println(error/2);
+            count++;
+        }
+        for(int h = 0; h < nh; h++) {
+            for(int i = 0; i < n; i++) 
+                System.out.println(hw[i][h]);
+            System.out.println(ow[h]);
         }
     }
 }
