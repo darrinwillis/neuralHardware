@@ -6,10 +6,10 @@ module fixed_point_multiplier (
 	bit[15:0] intA, fracA, intB, fracB;
 	bit[31:0] iAiB, iAfB, fAiB, fAfB;
 
-	intA = dataa[31:16]; 
-	fracA = {dataa[31], dataa[15:1]};
-	intB = datab[31:16];
-	fracB = {datab[31], datab[15:1]};
+	assign intA = dataa[31:16]; 
+	assign fracA = {dataa[31], dataa[15:1]};
+	assign intB = datab[31:16];
+	assign fracB = {datab[31], datab[15:1]};
 
 	multiplier_16 int1int2(
 		.dataa(intA),
@@ -35,7 +35,7 @@ module fixed_point_multiplier (
 
 	assign result = {iAiB, 16'd0} + 
 					iAfB +
-					fAiB
+					fAiB +
 					{fAfB[31] ? 16'hffff : 16'h0000, fAfB[30:15]};
 
-endmodule
+endmodule: fixed_point_multiplier
