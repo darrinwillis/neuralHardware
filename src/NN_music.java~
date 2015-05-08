@@ -41,7 +41,7 @@ public class NN_music {
         
         NN_music nn = new NN_music();
         nn.BP(lines);
-        System.out.println("TRAINING COMPLETED! NOW PREDICTING");
+        System.out.println("TRAINING COMPLETED! NOW PREDICTING.");
         BufferedReader dev = new BufferedReader(new FileReader(args[1]));
         lines.clear();
         line = dev.readLine();
@@ -116,6 +116,11 @@ public class NN_music {
                     for(int i = 0; i < n; i++) 
                         sum += hw[i][h] * ex[i];
                     hid[h] = 1/(1+Math.exp(-sum));
+		    if (count % 10 == 0) { 
+			System.out.println("denom" + (1 + Math.exp(-sum)));
+			System.out.println("sum" + -sum);
+			System.out.println("hidden" & hid[h]);
+		    }
                 }
                 
                 sum = 0;
