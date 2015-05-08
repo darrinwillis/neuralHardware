@@ -1113,12 +1113,6 @@ set_instance_assignment -name FAST_INPUT_REGISTER ON -to *
 set_instance_assignment -name FAST_OUTPUT_REGISTER ON -to *
 set_instance_assignment -name TSU_REQUIREMENT "10 ns" -from * -to *
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name SYSTEMVERILOG_FILE SevenSegmentDigit.sv
-set_global_assignment -name SYSTEMVERILOG_FILE fixed_point_multiplier.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ChipInterface.sv
-set_global_assignment -name SYSTEMVERILOG_FILE BCHtoSevenSegment.sv
-set_global_assignment -name QIP_FILE multiplier_16.qip
-set_global_assignment -name SOURCE_FILE db/neuralComputer.cmp.rdb
 set_global_assignment -name ENABLE_OCT_DONE OFF
 set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
 set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
@@ -1129,5 +1123,12 @@ set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name SYSTEMVERILOG_FILE SevenSegmentDigit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE fixed_point_multiplier.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ChipInterface.sv
+set_global_assignment -name SYSTEMVERILOG_FILE BCHtoSevenSegment.sv
+set_global_assignment -name QIP_FILE multiplier_16.qip
+set_global_assignment -name SOURCE_FILE db/neuralComputer.cmp.rdb
 set_global_assignment -name CDF_FILE output_files/Chain3.cdf
+set_global_assignment -name QIP_FILE multiplier_32.qip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
