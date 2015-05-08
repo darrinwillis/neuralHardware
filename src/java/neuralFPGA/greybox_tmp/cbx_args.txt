@@ -1,0 +1,18 @@
+MSW_SUBTRACT=NO
+PIPELINE=0
+REPRESENTATION=UNSIGNED
+RESULT_ALIGNMENT=LSB
+SHIFT=0
+SIZE=8
+WIDTH=8
+WIDTHR=11
+DEVICE_FAMILY="Cyclone IV E"
+data
+data
+data
+data
+data
+data
+data
+data
+result
