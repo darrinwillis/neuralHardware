@@ -42,6 +42,15 @@
 
 <p>We will be investigating an implementation of Neural Networks into a low-energy FPGA implementation. Neural Networks are a common machine learning algorithm with a high potential for parallelization, which can be exploited by hardware. This energy efficient neural network is perfect for mobile devices.</p>
 
+<h3>
+<a id="5/8 Update" class="anchor" href="#evaluation" aria-hidden="true"><span class="octicon octicon-link"></span></a>5/8 Update</h3>
+
+<p>We have successfully implemented a neural network on the FPGA. One unforseen challenge was designing out the method to represent floating point values on the FPGA. Using standard floating point representation would introduce performance issues involving basic arithmetic operations. Instead, we use a custom fixed point representation of floats involving 1 sign bit, 15 integer bits, and 16 floating bits. Addition can be done the same way as integer addition and multiplication can be done using integer multiplication combined with a right shift. </p>
+
+<p>Our neural network is represented using 4 matrices: input, hidden_output, hidden_weights, and output_weights. Running the backpropagation algorithm for a single training example takes a total of 11 clock cycles, with a matrix operation being computed during each cycle. This reduces the total number of cycles taken by a significant amount when compared with the PC side implementation. </p>
+
+<p>One application of this FPGA program is a matchmaking app designed for a smart watch. The energy and performance upgrades fit the needs of an on-demand mobile application. When activated, the smart watch will read the tone, body language, proximity, and eye contact of the person you are speaking to. These 4 inputs are passed in as numerical values into the FPGA. The output will be a yes or no answer to the question of whether or not the person is interested in you. Our evaluation plan involves first generating a function that takes in these 4 inputs and gives a yes or no output. Then, we randomize the values for each attribute and apply the function, giving us our training examples. Our test examples will be generated the same way, and we will measure how accurately our FPGA modeled the function. </p>
+
 <h2>
 <a id="background" class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h2>
 
@@ -125,6 +134,7 @@
 <li>Interesting application of neural networks (AI, image processing, etc.)</li>
 <li>Different hardware implementations to compare hardware stacks</li>
 </ul>
+
 
 <h2>
 <a id="platform-choice" class="anchor" href="#platform-choice" aria-hidden="true"><span class="octicon octicon-link"></span></a>Platform Choice</h2>
