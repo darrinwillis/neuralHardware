@@ -1,4 +1,3 @@
-
 module fixed_point_multiplier (
 	input bit[31:0] dataa, datab,
 	output bit[31:0] result);

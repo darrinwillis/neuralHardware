@@ -1123,6 +1123,7 @@ set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name SYSTEMVERILOG_FILE sigmoid.sv
 set_global_assignment -name SYSTEMVERILOG_FILE SevenSegmentDigit.sv
 set_global_assignment -name SYSTEMVERILOG_FILE fixed_point_multiplier.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ChipInterface.sv
