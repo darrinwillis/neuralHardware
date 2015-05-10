@@ -116,11 +116,6 @@ public class NN_music {
                     for(int i = 0; i < n; i++) 
                         sum += hw[i][h] * ex[i];
                     hid[h] = 1/(1+Math.exp(-sum));
-		    if (count % 10 == 0) { 
-			System.out.println("denom" + (1 + Math.exp(-sum)));
-			System.out.println("sum" + -sum);
-			System.out.println("hidden" + hid[h]);
-		    }
                 }
                 
                 sum = 0;
