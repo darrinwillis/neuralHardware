@@ -53,7 +53,7 @@ module neuralProcessor (
 	bit[31:0] stored_output_error;
 	bit[3:0][31:0] stored_hidden_error;
 
-	assign last_train = (address - 2) == numTrain;
+	assign last_train = (address - 2) == (numTrain << 2) + numTrain+6;
 
     always_ff @(posedge clk, posedge rst) begin
         if (rst) begin
@@ -75,9 +75,11 @@ module neuralProcessor (
         		end
             if (load_num_train) begin
                 numTrain <= mem_data;
+                test_output[31:24] <= numTrain;
                 end
             if (load_num_test) begin
             	numTest <= mem_data;
+            	test_output[23:16] <= numTest;
             	end
             if (load_new_weights) begin
             	for (int i=0; i < 4; i++) begin

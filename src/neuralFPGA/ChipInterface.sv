@@ -57,31 +57,7 @@ module TopTest;
         key[1] <= 0;
         @(posedge clk);
         key[1] <= 1;
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-
-        @(posedge clk);
-        @(posedge clk);@(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-        @(posedge clk);
-
+        wait(hexDisplays[0] != 7'b1000000);
         $finish;
         end
 
