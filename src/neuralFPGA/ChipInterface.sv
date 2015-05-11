@@ -3,9 +3,14 @@ module ChipInterface
      input  logic[17:0] SW,
      input  logic[3:0] KEY,
      output logic[17:0] LEDR,
+     output logic[8:0] LEDG,
      output logic[6:0] HEX7, HEX6 ,HEX5, HEX4, HEX3, HEX2, HEX1, HEX0);
 
     assign LEDR = SW;
+    assign LEDG = {2'd0, ~KEY[3],
+    			   1'b0, ~KEY[2],
+    			   1'b0, ~KEY[1],
+    			   1'b0, ~KEY[0]};
 
     SimpleTest st(
     	.clk(CLOCK_50),
