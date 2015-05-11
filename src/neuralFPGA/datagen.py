@@ -2,7 +2,7 @@ import random
 
 trains = 200;
 tests = 10;
-depth = 200 * 5 + 10 * 4 + 2;
+depth = trains * 5 + tests * 5 + 2;
 
 target = open("data.mif", 'w')
 target.truncate()
@@ -82,6 +82,10 @@ for i in range(0, tests):
         output = 0
     else:
         output = 1
+    val = "%08x" % (int)(output * 65536)
+    index = "%03x" % size
+    size+=1
+    target.write(index + " : " + val + ";\n")
     dev.write(str(output) + '\n')
         
 target.write("\nEND;\n")
