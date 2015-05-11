@@ -20,20 +20,8 @@ public class NN_music {
         while(line != null) {
             String[] words = line.split(",");
             double[] vals = new double[words.length];
-            vals[0] = (2000 - Double.parseDouble(words[0]))/50 - 1;
-            vals[1] = (7 - Double.parseDouble(words[1]))/3.5 - 1;
-            if(words[2].equals("yes"))
-                vals[2] = 1;
-            else
-                vals[2] = -1;
-            if(words[3].equals("yes"))
-                vals[3] = 1;
-            else
-                vals[3] = -1;
-            if(words[4].equals("yes"))
-                vals[4] = 1;
-            else
-                vals[4] = 0;
+	    for(int i = 0; i < words.length; i ++)
+		vals[i] = Double.parseDouble(words[i]);
             lines.add(vals);
             size++;
             line = test.readLine();
@@ -49,17 +37,8 @@ public class NN_music {
         while(line != null) {
             String[] words = line.split(",");
             double[] vals = new double[words.length];
-            vals[0] = (2000 - Double.parseDouble(words[0]))/50 - 1;
-            vals[1] = (7 - Double.parseDouble(words[1]))/3.5 - 1;
-            if(words[2].equals("yes"))
-                vals[2] = 1;
-            else
-                vals[2] = -1;
-            if(words[3].equals("yes"))
-                vals[3] = 1;
-            else
-                vals[3] = -1;
-          
+	    for(int i = 0; i < words.length; i ++)
+		vals[i] = Double.parseDouble(words[i]);          
             lines.add(vals);
             size++;
             line = dev.readLine();
@@ -113,8 +92,11 @@ public class NN_music {
             for(double[] ex : test) {
                 for(int h = 0; h < nh; h++) {
                     sum = 0;
-                    for(int i = 0; i < n; i++) 
+                    for(int i = 0; i < n; i++)  {
+			System.out.println(hw[i][h]);
+			System.out.println(ex[i]);
                         sum += hw[i][h] * ex[i];
+		    }
                     hid[h] = 1/(1+Math.exp(-sum));
                 }
                 
