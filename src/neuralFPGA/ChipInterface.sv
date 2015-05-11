@@ -58,6 +58,19 @@ module TopTest;
         @(posedge clk);
         key[1] <= 1;
         wait(hexDisplays[0] != 7'b1000000);
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        sw <= 18'd2;
+        key[2] <= 0;
+        @(posedge clk);
+        key[2] <= 1;
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        @(posedge clk);
+        
         $finish;
         end
 

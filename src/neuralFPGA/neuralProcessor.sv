@@ -18,7 +18,8 @@ module neuralProcessor (
 			inc_address,
 			rst_address,
 			store_test_out,
-			ready_to_test;
+			ready_to_test,
+			load_test_address;
 	bit[2:0] input_sel;
 
 	// Meta-data
@@ -26,6 +27,8 @@ module neuralProcessor (
 	bit[31:0] learn_rate;
 	bit[31:0] iw; // initial weight
 	assign iw = 32'h0000_3800; // 1/8 + 1/16 + 1/32 ~ 0.22 ~ 0.2
+	bit[10:0] test_address;
+	assign test_address = (numTrain << 2) + numTrain + 2;
 
 	// Parameters
 	bit[3:0][3:0][31:0] hidden_products;
@@ -53,7 +56,7 @@ module neuralProcessor (
 	bit[31:0] stored_output_error;
 	bit[3:0][31:0] stored_hidden_error;
 
-	assign last_train = (address - 2) == (numTrain << 2) + numTrain+6;
+	assign last_train = address == test_address+1;
 
     always_ff @(posedge clk, posedge rst) begin
         if (rst) begin
@@ -107,11 +110,14 @@ module neuralProcessor (
             if (rst_address) begin
             	address <= 11'd2;
             	end
+            if (load_test_address) begin
+            	address <= test_address + (test_sel << 2) + test_sel - 3;
+            	end
             if (store_test_out) begin
             	test_output <= stored_final_output;
             	end
             if (ready_to_test) begin
-            	test_output <= 32'hD00D_B00B;
+            	test_output[15:0] <= 16'hD00D;
             	end
             end
         end
@@ -241,6 +247,7 @@ module neuralFSM (
 				rst_address,
 				store_test_out,
 				ready_to_test,
+				load_test_address,
 	output bit[2:0] input_sel
 );
 
@@ -248,8 +255,9 @@ module neuralFSM (
 	bit dec_iterations;
 	bit training_mode, load_mode;
 	bit inc_input_sel;
+	bit end_of_train;
 	enum logic[3:0] {START1, START2, INIT1, INIT2, WAIT, HOLD, LOADING, LOADED_DATA, LOADED_OUT,
-					 O_ERR_CALCED, H_ERR_CALCED, DATUM_DONE, 
+					 O_ERR_CALCED, H_ERR_CALCED, DATUM_DONE, RST_ADDR, START_NEXT,
 					 LOADED_TEST, LOADED_TEST_OUT} cs, ns;
 
     always_ff @(posedge clk, posedge rst) begin
@@ -274,6 +282,8 @@ module neuralFSM (
         end
 
     always_comb begin
+    	end_of_train = (last_train && numIterations == 0);
+
     	load_num_train = 'b0;
     	load_num_test = 'b0;
         load_mem = 'b0;
@@ -288,6 +298,7 @@ module neuralFSM (
         rst_address = 'b0;
         load_mode = 'b0;
         inc_input_sel = 'b0;
+        load_test_address = 'b0;
         case (cs) 
         	START1: begin
         		ns = START2;
@@ -309,6 +320,7 @@ module neuralFSM (
                 ns = (train | test) ? HOLD : WAIT;
                 inc_address = train | test;
                 load_mode = 'b1;
+                load_test_address = test;
                 end
             HOLD: begin
             	ns = LOADING;
@@ -338,13 +350,21 @@ module neuralFSM (
 	        	inc_address = 'b1;
 	        	end
 	        DATUM_DONE: begin
-	        	ns = last_train && numIterations == 0 ? WAIT : HOLD;
+	        	ns = end_of_train ? WAIT : (last_train ? RST_ADDR : HOLD);
 	        	rst_address = last_train && numIterations != 0;
-	        	load_mem = ~(last_train && numIterations == 0);
-	        	inc_input_sel = ~(last_train && numIterations == 0);
-	        	inc_address = ~(last_train && numIterations == 0);
-	        	dec_iterations = 'b1;
-	        	ready_to_test = last_train && numIterations == 0;
+	        	load_mem = ~end_of_train & ~rst_address;
+	        	inc_input_sel = ~end_of_train & ~rst_address;
+	        	inc_address = ~end_of_train & ~rst_address;
+	        	dec_iterations = last_train;
+	        	ready_to_test = end_of_train;
+	        	end
+	        RST_ADDR: begin
+	        	ns = HOLD;
+	        	inc_address = 'b1;
+	        	end
+	        START_NEXT: begin
+	        	ns = HOLD;
+	        	inc_address = 'b1;
 	        	end
 	        // Now just states dealing with testing, not training
 	        LOADED_TEST: begin
