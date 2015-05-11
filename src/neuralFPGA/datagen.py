@@ -1,5 +1,9 @@
 import random
 
+trains = 200;
+tests = 10;
+depth = 200 * 5 + 10 * 4 + 2;
+
 target = open("data.mif", 'w')
 target.truncate()
 
@@ -9,18 +13,18 @@ train.truncate()
 dev = open("../java/dev", 'w')
 dev.truncate()
 
+test = open("love.data", 'w')
+test.truncate()
+
+test.write(str(trains) + " 4 1\n")
 train.write("label\n");
 dev.write("label\n");
 
 parameters = []
-parameters.append(random.random()/5 + .15)
-parameters.append(random.random()/5 + .15)
-parameters.append(random.random()/5 + .15)
-parameters.append(random.random()/5 + .15)
-
-trains = 200;
-tests = 10;
-depth = 200 * 5 + 10 * 4 + 2;
+parameters.append(random.random()/4 + .1)
+parameters.append(random.random()/4 + .1)
+parameters.append(random.random()/4 + .1)
+parameters.append(random.random()/4 + .1)
 
 target.write("DEPTH = " + str(depth) + ";\n");
 target.write("WIDTH = 32;\n");
@@ -51,6 +55,7 @@ for i in range(0, trains):
         size+=1
         target.write(index + " : " + val + ";\n")
         train.write(str(value) + ",")
+        test.write(str(value) + " ")
         sum += value * parameters[j];
     if(sum < .5):
         output = 0
@@ -61,6 +66,7 @@ for i in range(0, trains):
     size+=1
     target.write(index + " : " + val + ";\n")
     train.write(str(output) + '\n')
+    test.write("\n" + str(output) + "\n")
 
 for i in range(0, tests):
     sum = 0
