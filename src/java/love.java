@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class NN_music {
+public class love {
     public final int nh = 4;
     public final double r = .2;
     public final int n = 4;
@@ -62,9 +62,9 @@ public class NN_music {
                 sum += ow[h] * hid[h];
             
             if (.5 < 1/(1+Math.exp(-sum))) 
-                System.out.println("yes");
+                System.out.println("yes:" + ex[n]);
             else 
-                System.out.println("no");
+                System.out.println("no:" + ex[n]);
         }
     }
     
@@ -93,8 +93,6 @@ public class NN_music {
                 for(int h = 0; h < nh; h++) {
                     sum = 0;
                     for(int i = 0; i < n; i++)  {
-			System.out.println(hw[i][h]);
-			System.out.println(ex[i]);
                         sum += hw[i][h] * ex[i];
 		    }
                     hid[h] = 1/(1+Math.exp(-sum));
