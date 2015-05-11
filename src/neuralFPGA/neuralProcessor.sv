@@ -246,13 +246,13 @@ module neuralFSM (
 	bit dec_iterations;
 	bit training_mode, load_mode;
 	bit inc_input_sel;
-	enum logic[3:0] {INIT1, INIT2, WAIT, HOLD, LOADING, LOADED_DATA, LOADED_OUT,
+	enum logic[3:0] {START1, START2, INIT1, INIT2, WAIT, HOLD, LOADING, LOADED_DATA, LOADED_OUT,
 					 O_ERR_CALCED, H_ERR_CALCED, DATUM_DONE, 
 					 LOADED_TEST, LOADED_TEST_OUT} cs, ns;
 
     always_ff @(posedge clk, posedge rst) begin
         if (rst) begin
-            cs <= INIT1;
+            cs <= START1;
             numIterations <= 8'd200;
             input_sel <= 3'd0;
             training_mode <= 'b0;
@@ -287,6 +287,13 @@ module neuralFSM (
         load_mode = 'b0;
         inc_input_sel = 'b0;
         case (cs) 
+        	START1: begin
+        		ns = START2;
+        		inc_address = 'b1;
+        		end
+        	START2: begin
+        		ns = INIT1;
+        		end
             INIT1: begin
                 ns = INIT2;
                 load_num_train = 'b1;
