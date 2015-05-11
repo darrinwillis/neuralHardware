@@ -11,6 +11,7 @@ public class love {
     public double[] ow = new double[nh];
     
     public static void main(String[] args) throws Exception{
+	long startTime = System.currentTimeMillis();
         BufferedReader test = new BufferedReader(new FileReader(args[0]));
         String line = test.readLine();
         List<double[]> lines = new ArrayList<double[]>();
@@ -29,7 +30,8 @@ public class love {
         
         NN_music nn = new NN_music();
         nn.BP(lines);
-        System.out.println("TRAINING COMPLETED! NOW PREDICTING.");
+	long endTime = System.currentTimeMillis();
+        System.out.println("TRAINING COMPLETED in " + (endTime - startTime) + "! NOW PREDICTING.");
         BufferedReader dev = new BufferedReader(new FileReader(args[1]));
         lines.clear();
         line = dev.readLine();
